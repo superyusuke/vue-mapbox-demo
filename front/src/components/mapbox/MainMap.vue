@@ -10,6 +10,7 @@
       :center="center"
     >
       <MglNavigationControl />
+      <MapboxMarker />
     </MglMap>
   </div>
 </template>
@@ -17,21 +18,22 @@
 <script lang="ts">
 import "mapbox-gl/dist/mapbox-gl.css"; // mapbox 用の CSS
 import * as vueMapbox from "vue-mapbox"; // typeScript 的な記述。内容については後述
-export default {
-  name: "MainMap",
+import MapboxMarker from "@/components/mapbox/MapboxMarker.vue";
+import { Component, Vue } from "vue-property-decorator";
+
+@Component({
   components: {
     MglMap: vueMapbox.MglMap, // メインの地図
-    MglNavigationControl: vueMapbox.MglNavigationControl // 拡大縮尺等のコントローラーコンポーネント
-  },
-  data() {
-    return {
-      accessToken: process.env.VUE_APP_MAPBOX_KEY, // 環境変数として持つ。オープンな git リポジトリにキーを公開しないため。
-      zoom: 17,
-      mapStyle: "mapbox://styles/mapbox/streets-v10", // 見た目。色々あるが標準のものを採用
-      center: { lon: 139.7009177, lat: 35.6580971 } // 地図の中心地
-    };
+    MglNavigationControl: vueMapbox.MglNavigationControl, // 拡大縮尺等のコントローラーコンポーネント
+    MapboxMarker
   }
-};
+})
+export default class MainMap extends Vue {
+  accessToken = process.env.VUE_APP_MAPBOX_KEY; // 環境変数として持つ。オープンな git リポジトリにキーを公開しないため。
+  zoom = 17;
+  mapStyle = "mapbox://styles/mapbox/streets-v10"; // 見た目。色々あるが標準のものを採用
+  center = { lon: 139.7009177, lat: 35.6580971 }; // 地図の中心地
+}
 </script>
 
 <style>
