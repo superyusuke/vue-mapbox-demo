@@ -10,7 +10,7 @@
       :center="center"
     >
       <MglNavigationControl />
-      <MapboxMarker />
+      <MarkerWrapper :points="points" />
     </MglMap>
   </div>
 </template>
@@ -18,14 +18,16 @@
 <script lang="ts">
 import "mapbox-gl/dist/mapbox-gl.css"; // mapbox 用の CSS
 import * as vueMapbox from "vue-mapbox"; // typeScript 的な記述。内容については後述
-import MapboxMarker from "@/components/mapbox/MapboxMarker.vue";
+import MarkerWrapper from "@/components/mapbox/MarkerWrapper.vue";
 import { Component, Vue } from "vue-property-decorator";
+import axios from "axios";
+import { pointData } from "@/components/mapbox/points";
 
 @Component({
   components: {
     MglMap: vueMapbox.MglMap, // メインの地図
     MglNavigationControl: vueMapbox.MglNavigationControl, // 拡大縮尺等のコントローラーコンポーネント
-    MapboxMarker
+    MarkerWrapper
   }
 })
 export default class MainMap extends Vue {
@@ -33,6 +35,22 @@ export default class MainMap extends Vue {
   zoom = 17;
   mapStyle = "mapbox://styles/mapbox/streets-v10"; // 見た目。色々あるが標準のものを採用
   center = { lon: 139.7009177, lat: 35.6580971 }; // 地図の中心地
+  points: pointData[] = [];
+
+  private async created() {
+    const data = await this.fetchData();
+    this.points = data;
+    console.log(data);
+  }
+  public async fetchData(): Promise<pointData[]> {
+    try {
+      const res = await axios.get("/api/points");
+      const { data } = res;
+      return data;
+    } catch (e) {
+      throw new Error(e);
+    }
+  }
 }
 </script>
 

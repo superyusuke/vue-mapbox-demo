@@ -14,9 +14,10 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Prop, Vue } from "vue-property-decorator";
 import * as vueMapbox from "vue-mapbox";
 import randomcolor from "randomcolor";
+import { pointData } from "@/components/mapbox/points";
 
 @Component({
   components: {
@@ -24,9 +25,12 @@ import randomcolor from "randomcolor";
   }
 })
 export default class MapboxMarker extends Vue {
+  @Prop() private point!: pointData;
   // マーカーの位置
   get coordinates() {
-    return [139.7009177, 35.6580971];
+    const { coordinates } = this.point;
+    const { lng, lat } = coordinates;
+    return [lng, lat];
   }
   dragEnd(e: any) {
     const { lng, lat } = e.marker.getLngLat();
