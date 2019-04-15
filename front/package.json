@@ -10,9 +10,11 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
+    "@types/randomcolor": "^0.5.1",
     "axios": "^0.18.0",
     "core-js": "^2.6.5",
     "mapbox-gl": "^0.53.1",
+    "randomcolor": "^0.5.4",
     "vue": "^2.6.10",
     "vue-class-component": "^7.0.2",
     "vue-mapbox": "^0.2.2",
