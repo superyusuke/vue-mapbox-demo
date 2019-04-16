@@ -23,7 +23,7 @@ export type StorePoint = {
   toDelete: boolean;
   newItem: {
     isNew: boolean;
-    tempId: number;
+    tempId: number | null;
   };
 };
 

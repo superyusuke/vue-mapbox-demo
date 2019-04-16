@@ -1,22 +1,26 @@
 import { ActionTree } from "vuex";
-import { MapState, FetchedPoint } from "@/store/modules/map/types";
+import { MapState, FetchedPoint, StorePoint } from "@/store/modules/map/types";
 import axios from "axios";
+import storePointCreator from "@/store/modules/map/util/storePointCreator";
 
 export type IPayload = {
   point: FetchedPoint;
 };
 
 const actions: ActionTree<MapState, {}> = {
-  async fetchInitialPointList({ commit }) {
+  async fetchInitialPointList({ dispatch }) {
     try {
       const res = await axios.get("/api/points");
       const { data }: { data: FetchedPoint[] } = res;
-      commit("setInitialPointList", data);
+      const pointList: StorePoint[] = data.map(point => {
+        return storePointCreator(point);
+      });
+      dispatch("setInitialPointList", pointList);
     } catch (e) {
       throw new Error(e);
     }
   },
-  setInitialPointList({ commit }, pointList: FetchedPoint[]) {
+  setInitialPointList({ commit }, pointList: StorePoint[]) {
     commit("setInitialPointList", pointList);
   },
   addPointToList({ commit }, payload: IPayload) {

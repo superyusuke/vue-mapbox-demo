@@ -1,7 +1,4 @@
 {
-  "posts": [{ "id": 1, "title": "json-server", "author": "typicode" }],
-  "comments": [{ "id": 1, "body": "some comment", "postId": 1 }],
-  "profile": { "name": "typicode" },
   "points": [
     {
       "coordinates": {
@@ -9,7 +6,8 @@
         "lat": 35.6580971
       },
       "name": "name1",
-      "id": 1
+      "id": 1,
+      "active": true
     },
     {
       "coordinates": {
@@ -17,7 +15,8 @@
         "lat": 35.65803607896774
       },
       "name": "name2",
-      "id": 2
+      "id": 2,
+      "active": false
     }
   ]
 }
