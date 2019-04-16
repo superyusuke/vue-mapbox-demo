@@ -8,7 +8,7 @@
   >
     <!-- この名前の slot に与えることで、custom の UI を使える -->
     <template slot="marker">
-      <div class="tempMarker">this is markerUI</div>
+      <div class="tempMarker">{{ point }}</div>
     </template>
   </MglMarker>
 </template>
@@ -17,7 +17,7 @@
 import { Component, Prop, Vue } from "vue-property-decorator";
 import * as vueMapbox from "vue-mapbox";
 import randomcolor from "randomcolor";
-import { pointData } from "@/components/mapbox/points";
+import { PointForUI } from "@/store/modules/map/types";
 
 @Component({
   components: {
@@ -25,7 +25,7 @@ import { pointData } from "@/components/mapbox/points";
   }
 })
 export default class MapboxMarker extends Vue {
-  @Prop() private point!: pointData;
+  @Prop() private point!: PointForUI;
   // マーカーの位置
   get coordinates() {
     const { coordinates } = this.point;

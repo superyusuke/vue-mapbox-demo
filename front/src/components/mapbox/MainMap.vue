@@ -24,8 +24,7 @@ import { Component, Vue } from "vue-property-decorator";
 import { State, Getter, Action, Mutation, namespace } from "vuex-class";
 import axios from "axios";
 import { NAME_SPACE } from "@/store";
-import { IPayload } from "@/store/modules/map/actions";
-import { PointForUI } from "@/store/modules/map/types";
+import { Coordinates, PointForUI } from "@/store/modules/map/types";
 
 const mapModule = namespace(NAME_SPACE.map);
 
@@ -49,7 +48,7 @@ export default class MainMap extends Vue {
   private pointListForUI!: PointForUI[];
 
   @mapModule.Action("addPointToList")
-  private addPointToList!: (payload: IPayload) => void;
+  private addPointToList!: (coordinates: Coordinates) => void;
 
   private created() {
     // API から取得
@@ -58,18 +57,11 @@ export default class MainMap extends Vue {
 
   private async clickHandler(e: any) {
     const { lng, lat } = e.mapboxEvent.lngLat;
-    const payload: IPayload = {
-      point: {
-        coordinates: {
-          lat,
-          lng
-        },
-        id: 0,
-        name: "dummyName",
-        active: true
-      }
+    const coordinates = {
+      lat,
+      lng
     };
-    this.addPointToList(payload);
+    this.addPointToList(coordinates);
   }
 }
 </script>
