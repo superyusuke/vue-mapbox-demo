@@ -4,6 +4,7 @@
       <a>トップページへ移動する</a>
     </router-link>
     <MglMap
+      @click="clickHandler"
       :accessToken="accessToken"
       :mapStyle="mapStyle"
       :zoom.sync="zoom"
@@ -42,7 +43,7 @@ export default class MainMap extends Vue {
     this.points = data;
     console.log(data);
   }
-  public async fetchData(): Promise<pointData[]> {
+  private async fetchData(): Promise<pointData[]> {
     try {
       const res = await axios.get("/api/points");
       const { data } = res;
@@ -50,6 +51,11 @@ export default class MainMap extends Vue {
     } catch (e) {
       throw new Error(e);
     }
+  }
+
+  private async clickHandler(e: any) {
+    const { lng, lat } = e.mapboxEvent.lngLat;
+    console.log({ lng, lat });
   }
 }
 </script>
