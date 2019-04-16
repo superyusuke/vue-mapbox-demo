@@ -1,11 +1,11 @@
 import { MutationTree } from "vuex";
-import { MapState, Point } from "@/store/modules/map/types";
+import { MapState, FetchedPoint } from "@/store/modules/map/types";
 
 const mutations: MutationTree<MapState> = {
-  addPointToList(state, point: Point) {
+  addPointToList(state, point: FetchedPoint) {
     state.pointList.push(point);
   },
-  setInitialPointList(state, pointList: Point[]) {
+  setInitialPointList(state, pointList: FetchedPoint[]) {
     state.pointList = pointList;
   }
 };

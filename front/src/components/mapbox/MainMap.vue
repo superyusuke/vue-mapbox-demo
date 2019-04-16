@@ -25,7 +25,7 @@ import { State, Getter, Action, Mutation, namespace } from "vuex-class";
 import axios from "axios";
 import { NAME_SPACE } from "@/store";
 import { IPayload } from "@/store/modules/map/actions";
-import { Point } from "@/store/modules/map/types";
+import { FetchedPoint } from "@/store/modules/map/types";
 
 const mapModule = namespace(NAME_SPACE.map);
 
@@ -42,28 +42,18 @@ export default class MainMap extends Vue {
   mapStyle = "mapbox://styles/mapbox/streets-v10"; // 見た目。色々あるが標準のものを採用
   center = { lon: 139.7009177, lat: 35.6580971 }; // 地図の中心地
 
-  @mapModule.Getter("pointList")
-  private pointList!: Point[];
+  @mapModule.Action("fetchInitialPointList")
+  private fetchInitialPointList!: () => void;
 
-  @mapModule.Action("setInitialPointList")
-  private setInitialPointList!: (pointList: Point[]) => void;
+  @mapModule.Getter("pointList")
+  private pointList!: FetchedPoint[];
 
   @mapModule.Action("addPointToList")
   private addPointToList!: (payload: IPayload) => void;
 
-  private async created() {
-    const data: Point[] = await this.fetchData();
-    this.setInitialPointList(data);
-    console.log(data);
-  }
-  private async fetchData(): Promise<Point[]> {
-    try {
-      const res = await axios.get("/api/points");
-      const { data } = res;
-      return data;
-    } catch (e) {
-      throw new Error(e);
-    }
+  private created() {
+    // API から取得
+    this.fetchInitialPointList();
   }
 
   private async clickHandler(e: any) {
@@ -75,7 +65,8 @@ export default class MainMap extends Vue {
           lng
         },
         id: 0,
-        name: "dummyName"
+        name: "dummyName",
+        active: true
       }
     };
     this.addPointToList(payload);
