@@ -11,7 +11,7 @@
       :center="center"
     >
       <MglNavigationControl />
-      <MarkerWrapper :points="points" />
+      <MarkerWrapper :points="pointList" />
     </MglMap>
   </div>
 </template>
@@ -21,8 +21,13 @@ import "mapbox-gl/dist/mapbox-gl.css"; // mapbox 用の CSS
 import * as vueMapbox from "vue-mapbox"; // typeScript 的な記述。内容については後述
 import MarkerWrapper from "@/components/mapbox/MarkerWrapper.vue";
 import { Component, Vue } from "vue-property-decorator";
+import { State, Getter, Action, Mutation, namespace } from "vuex-class";
 import axios from "axios";
-import { pointData } from "@/components/mapbox/points";
+import { NAME_SPACE } from "@/store";
+import { IPayload } from "@/store/modules/map/actions";
+import { Point } from "@/store/modules/map/types";
+
+const mapModule = namespace(NAME_SPACE.map);
 
 @Component({
   components: {
@@ -36,14 +41,22 @@ export default class MainMap extends Vue {
   zoom = 17;
   mapStyle = "mapbox://styles/mapbox/streets-v10"; // 見た目。色々あるが標準のものを採用
   center = { lon: 139.7009177, lat: 35.6580971 }; // 地図の中心地
-  points: pointData[] = [];
+
+  @mapModule.Getter("pointList")
+  private pointList!: Point[];
+
+  @mapModule.Action("setInitialPointList")
+  private setInitialPointList!: (pointList: Point[]) => void;
+
+  @mapModule.Action("addPointToList")
+  private addPointToList!: (payload: IPayload) => void;
 
   private async created() {
-    const data = await this.fetchData();
-    this.points = data;
+    const data: Point[] = await this.fetchData();
+    this.setInitialPointList(data);
     console.log(data);
   }
-  private async fetchData(): Promise<pointData[]> {
+  private async fetchData(): Promise<Point[]> {
     try {
       const res = await axios.get("/api/points");
       const { data } = res;
@@ -55,7 +68,17 @@ export default class MainMap extends Vue {
 
   private async clickHandler(e: any) {
     const { lng, lat } = e.mapboxEvent.lngLat;
-    console.log({ lng, lat });
+    const payload: IPayload = {
+      point: {
+        coordinates: {
+          lat,
+          lng
+        },
+        id: 0,
+        name: "dummyName"
+      }
+    };
+    this.addPointToList(payload);
   }
 }
 </script>
