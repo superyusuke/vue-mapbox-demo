@@ -6,7 +6,8 @@ import actions from "@/store/modules/map/actions";
 import getters from "@/store/modules/map/getters";
 
 const initialState: MapState = {
-  pointList: []
+  initialPointList: [],
+  currentPointList: []
 };
 
 const namespaced = true;

@@ -1,9 +1,15 @@
 import { GetterTree } from "vuex";
-import { MapState } from "@/store/modules/map/types";
+import { MapState, PointForUI } from "@/store/modules/map/types";
+import pointForUICreator from "@/store/modules/map/util/pointForUICreator";
 
 const getters: GetterTree<MapState, {}> = {
-  pointList: (state: MapState) => {
-    return state.pointList;
+  pointListForUI(state: MapState): PointForUI {
+    const initialPointList = state.initialPointList;
+    const currentPointList = state.currentPointList;
+    return pointForUICreator({ initialPointList, currentPointList });
+  },
+  pointList(state: MapState) {
+    return state.initialPointList;
   }
 };
 

@@ -4,7 +4,8 @@ type Coordinates = {
 };
 
 export type MapState = {
-  pointList: FetchedPoint[];
+  initialPointList: StorePoint[];
+  currentPointList: StorePoint[];
 };
 
 export type FetchedPoint = {
