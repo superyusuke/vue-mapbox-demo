@@ -3,10 +3,11 @@ import { MapState, FetchedPoint, StorePoint } from "@/store/modules/map/types";
 
 const mutations: MutationTree<MapState> = {
   setInitialPointList(state, pointList: StorePoint[]) {
-    state.pointList = pointList;
+    state.initialPointList = pointList;
+    state.currentPointList = pointList;
   },
-  addPointToList(state, point: FetchedPoint) {
-    state.pointList.push(point);
+  addPointToList(state, point: StorePoint) {
+    state.currentPointList.push(point);
   }
 };
 

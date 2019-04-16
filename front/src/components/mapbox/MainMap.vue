@@ -11,7 +11,7 @@
       :center="center"
     >
       <MglNavigationControl />
-      <MarkerWrapper :points="pointList" />
+      <MarkerWrapper :points="pointListForUI" />
     </MglMap>
   </div>
 </template>
@@ -25,7 +25,7 @@ import { State, Getter, Action, Mutation, namespace } from "vuex-class";
 import axios from "axios";
 import { NAME_SPACE } from "@/store";
 import { IPayload } from "@/store/modules/map/actions";
-import { FetchedPoint } from "@/store/modules/map/types";
+import { PointForUI } from "@/store/modules/map/types";
 
 const mapModule = namespace(NAME_SPACE.map);
 
@@ -45,8 +45,8 @@ export default class MainMap extends Vue {
   @mapModule.Action("fetchInitialPointList")
   private fetchInitialPointList!: () => void;
 
-  @mapModule.Getter("pointList")
-  private pointList!: FetchedPoint[];
+  @mapModule.Getter("pointListForUI")
+  private pointListForUI!: PointForUI[];
 
   @mapModule.Action("addPointToList")
   private addPointToList!: (payload: IPayload) => void;
