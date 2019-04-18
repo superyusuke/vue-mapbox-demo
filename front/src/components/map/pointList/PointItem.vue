@@ -11,6 +11,7 @@ import { PointForUI, StorePoint } from "@/store/modules/map/types";
 import { NAME_SPACE } from "@/store";
 import createStorePointFromPointForUI from "@/store/modules/map/util/createStorePointFromPointForUI";
 import { css } from "emotion";
+import createIdForScroll from "@/components/map/pointList/createIdForScroll";
 
 const mapModule = namespace(NAME_SPACE.map);
 
@@ -51,10 +52,7 @@ export default class PointItem extends Vue {
 
   private get idForScroll() {
     const point = this.point;
-    if (point.newItem.isNew) {
-      return point.newItem.tempId + "new";
-    }
-    return point.id;
+    return createIdForScroll(point);
   }
 
   private get isActive(): boolean {

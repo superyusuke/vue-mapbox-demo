@@ -13,6 +13,7 @@ import { NAME_SPACE } from "@/store";
 import markerUIStyle from "@/components/map/mapbox/markerUIStyle";
 import PopUp from "@/components/map/mapbox/PopUp.vue";
 import createStorePointFromPointForUI from "@/store/modules/map/util/createStorePointFromPointForUI";
+import createIdForScroll from "@/components/map/pointList/createIdForScroll";
 
 const mapModule = namespace(NAME_SPACE.map);
 
@@ -40,10 +41,7 @@ export default class MarkerWrapper extends Vue {
 
   private get idForScroll() {
     const point = this.point;
-    if (point.newItem.isNew) {
-      return point.newItem.tempId + "new";
-    }
-    return point.id;
+    return createIdForScroll(point);
   }
 
   private getScroll() {
@@ -51,7 +49,9 @@ export default class MarkerWrapper extends Vue {
     const scrollPosition = element.scrollTop;
     console.log(scrollPosition);
 
-    const targetIdString: any = this.idForScroll;
+    const point = this.point;
+
+    const targetIdString = createIdForScroll(point);
 
     const targetGroup: any = document.getElementById(targetIdString);
     const topPos = targetGroup.offsetTop - 20;
