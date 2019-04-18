@@ -15,8 +15,8 @@ import { css } from "emotion";
 const mapModule = namespace(NAME_SPACE.map);
 
 const compStyle = (isActive: boolean) => {
-  const backgroundColor = isActive ? "red" : "transparent";
-  const hoverColor = isActive ? "red" : "#acd8fa";
+  const backgroundColor = isActive ? "#ff9b9b" : "transparent";
+  const hoverColor = isActive ? "#ff9b9b" : "#d7eeff";
   return css`
     background: ${backgroundColor};
     padding: 5px 10px;
