@@ -7,9 +7,14 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-import { PointForUI } from "@/store/modules/map/types";
+import { PointForUI, StorePoint } from "@/store/modules/map/types";
+import { State, Getter, Action, Mutation, namespace } from "vuex-class";
+import { NAME_SPACE } from "@/store";
 import markerUIStyle from "@/components/map/mapbox/markerUIStyle";
 import PopUp from "@/components/map/mapbox/PopUp.vue";
+import createStorePointFromPointForUI from "@/store/modules/map/util/createStorePointFromPointForUI";
+
+const mapModule = namespace(NAME_SPACE.map);
 
 @Component({
   components: { PopUp }
@@ -19,12 +24,17 @@ export default class MarkerWrapper extends Vue {
 
   @Prop() private isActive!: boolean;
 
+  @mapModule.Action("setActivePoint")
+  private setActivePoint!: (activePoint: StorePoint) => void;
+
   private get markerUIStyle() {
     return markerUIStyle;
   }
 
-  private markerClickHandler() {
-    console.log("ui click");
+  private markerClickHandler(e: any) {
+    e.stopPropagation();
+    const activePoint = createStorePointFromPointForUI(this.point);
+    this.setActivePoint(activePoint);
   }
 }
 </script>
