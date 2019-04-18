@@ -1,5 +1,5 @@
 <template>
-  <div class="pointList">
+  <div class="pointList" id="point-list">
     <div>
       <template v-for="point in pointListForUI">
         <PointItem

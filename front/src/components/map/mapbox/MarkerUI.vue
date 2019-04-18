@@ -35,6 +35,29 @@ export default class MarkerWrapper extends Vue {
     e.stopPropagation();
     const activePoint = createStorePointFromPointForUI(this.point);
     this.setActivePoint(activePoint);
+    this.getScroll();
+  }
+
+  private get idForScroll() {
+    const point = this.point;
+    if (point.newItem.isNew) {
+      return point.newItem.tempId + "new";
+    }
+    return point.id;
+  }
+
+  private getScroll() {
+    const element: any = document.getElementById("point-list");
+    const scrollPosition = element.scrollTop;
+    console.log(scrollPosition);
+
+    const targetIdString: any = this.idForScroll;
+
+    const targetGroup: any = document.getElementById(targetIdString);
+    const topPos = targetGroup.offsetTop - 20;
+    console.log(topPos);
+
+    element.scrollTop = topPos;
   }
 }
 </script>

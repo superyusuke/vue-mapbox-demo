@@ -1,5 +1,5 @@
 <template>
-  <div class="pointItem">
+  <div class="pointItem" :id="idForScroll">
     <div @click="clickHandler" :class="compStyle">{{ point.name }}</div>
   </div>
 </template>
@@ -47,6 +47,14 @@ export default class PointItem extends Vue {
   private get compStyle() {
     const isActive = this.isActive;
     return compStyle(isActive);
+  }
+
+  private get idForScroll() {
+    const point = this.point;
+    if (point.newItem.isNew) {
+      return point.newItem.tempId + "new";
+    }
+    return point.id;
   }
 
   private get isActive(): boolean {
