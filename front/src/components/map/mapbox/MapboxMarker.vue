@@ -6,9 +6,8 @@
     :draggable="true"
     @dragend="dragEnd"
   >
-    <!-- この名前の slot に与えることで、custom の UI を使える -->
     <template slot="marker">
-      <MarkerUI :point="point" />
+      <MarkerUI :point="point" :isActive="isActive" />
     </template>
   </MglMarker>
 </template>
@@ -33,8 +32,24 @@ const mapModule = namespace(NAME_SPACE.map);
 export default class MapboxMarker extends Vue {
   @Prop() private point!: PointForUI;
 
+  @mapModule.Getter("activePoint")
+  private activePoint!: StorePoint;
+
   @mapModule.Action("editPoint")
   private editPoint!: (newPoint: StorePoint) => void;
+
+  private get isActive(): boolean {
+    const thisPoint = this.point;
+    const activePoint = this.activePoint;
+
+    if (!thisPoint || !activePoint) {
+      return false;
+    }
+    if (!thisPoint.newItem.isNew) {
+      return thisPoint.id === activePoint.id;
+    }
+    return thisPoint.newItem.tempId === activePoint.newItem.tempId;
+  }
 
   get coordinates() {
     const { coordinates } = this.point;

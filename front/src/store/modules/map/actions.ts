@@ -37,6 +37,9 @@ const actions: ActionTree<MapState, {}> = {
   },
   editPoint({ commit }, newPoint: StorePoint) {
     commit("editPoint", newPoint);
+  },
+  setActivePoint({ commit }, activePoint: StorePoint) {
+    commit("setActivePoint", activePoint);
   }
 };
 

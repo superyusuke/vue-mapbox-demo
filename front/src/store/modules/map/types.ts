@@ -7,6 +7,7 @@ export type MapState = {
   initialPointList: StorePoint[];
   currentPointList: StorePoint[];
   tempId: number;
+  activePoint: StorePoint | null;
 };
 
 export type FetchedPoint = {

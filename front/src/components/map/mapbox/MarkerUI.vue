@@ -1,7 +1,7 @@
 <template>
   <div @click="markerClickHandler">
-    <div :class="markerUIStyle(point, isSelected)"></div>
-    <PopUp :isSelected="isSelected" :point="point" />
+    <div :class="markerUIStyle(point, isActive)"></div>
+    <PopUp :isSelected="isActive" :point="point" />
   </div>
 </template>
 
@@ -17,7 +17,7 @@ import PopUp from "@/components/map/mapbox/PopUp.vue";
 export default class MarkerWrapper extends Vue {
   @Prop() private point!: PointForUI;
 
-  isSelected = true;
+  @Prop() private isActive!: boolean;
 
   private get markerUIStyle() {
     return markerUIStyle;

@@ -13,6 +13,9 @@ const mutations: MutationTree<MapState> = {
   editPoint(state, newPoint: StorePoint) {
     const currentPointList = state.currentPointList;
     state.currentPointList = editPoint(currentPointList, newPoint);
+  },
+  setActivePoint(state, activePoint: StorePoint) {
+    state.activePoint = activePoint;
   }
 };
 

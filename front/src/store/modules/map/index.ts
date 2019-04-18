@@ -8,7 +8,8 @@ import getters from "@/store/modules/map/getters";
 const initialState: MapState = {
   initialPointList: [],
   currentPointList: [],
-  tempId: 1
+  tempId: 1,
+  activePoint: null
 };
 
 const namespaced = true;
