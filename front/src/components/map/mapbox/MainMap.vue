@@ -4,6 +4,7 @@
       <a>トップページへ移動する</a>
     </router-link>
     <MglMap
+      @load="onMapLoaded"
       @click="clickHandler"
       :accessToken="accessToken"
       :mapStyle="mapStyle"
@@ -41,6 +42,9 @@ export default class MainMap extends Vue {
   mapStyle = "mapbox://styles/mapbox/streets-v10"; // 見た目。色々あるが標準のものを採用
   center = { lon: 139.7009177, lat: 35.6580971 }; // 地図の中心地
 
+  @mapModule.Action("setMapboxActions")
+  private setMapboxActions!: (mapboxActions: any) => void;
+
   @mapModule.Action("fetchInitialPointList")
   private fetchInitialPointList!: () => void;
 
@@ -49,6 +53,11 @@ export default class MainMap extends Vue {
 
   @mapModule.Action("addPointToList")
   private addPointToList!: (coordinates: Coordinates) => void;
+
+  private onMapLoaded(event: any) {
+    const asyncActions = event.component.actions;
+    this.setMapboxActions(asyncActions);
+  }
 
   private created() {
     // API から取得

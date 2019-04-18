@@ -9,7 +9,8 @@ const initialState: MapState = {
   initialPointList: [],
   currentPointList: [],
   tempId: 1,
-  activePoint: null
+  activePoint: null,
+  mapboxActions: null
 };
 
 const namespaced = true;

@@ -8,6 +8,7 @@ export type MapState = {
   currentPointList: StorePoint[];
   tempId: number;
   activePoint: StorePoint | null;
+  mapboxActions: any;
 };
 
 export type FetchedPoint = {

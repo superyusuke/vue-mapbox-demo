@@ -38,6 +38,9 @@ export default class PointItem extends Vue {
   @mapModule.Action("setActivePoint")
   private setActivePoint!: (activePoint: StorePoint) => void;
 
+  @mapModule.Action("flyToPoint")
+  private flyToPoint!: (toPoint: PointForUI) => void;
+
   @mapModule.Getter("someGetter")
   private someGetter!: any[];
 
@@ -62,6 +65,7 @@ export default class PointItem extends Vue {
   private clickHandler() {
     const activePoint = createStorePointFromPointForUI(this.point);
     this.setActivePoint(activePoint);
+    this.flyToPoint(this.point);
   }
 }
 </script>
