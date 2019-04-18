@@ -18,7 +18,6 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 import { State, Getter, Action, Mutation, namespace } from "vuex-class";
 import { NAME_SPACE } from "@/store";
 import * as vueMapbox from "vue-mapbox";
-import randomcolor from "randomcolor";
 import { PointForUI, StorePoint } from "@/store/modules/map/types";
 import MarkerUI from "@/components/map/mapbox/MarkerUI.vue";
 import createStorePointFromPointForUI from "@/store/modules/map/util/createStorePointFromPointForUI";
@@ -55,7 +54,6 @@ export default class MapboxMarker extends Vue {
     const dom = this.$refs.marker as any;
     const markerDom = dom.marker._element;
     if (this.isActive) {
-      console.log(markerDom);
       markerDom.style.zIndex = 1000;
     } else {
       markerDom.style.zIndex = 1;
@@ -86,7 +84,6 @@ export default class MapboxMarker extends Vue {
   }
   dragEnd(e: any) {
     const { lng, lat } = e.marker.getLngLat();
-    console.log({ lng, lat });
 
     // 地点を変更する
     const currentPoint = this.point;
