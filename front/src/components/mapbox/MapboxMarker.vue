@@ -15,10 +15,14 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
+import { State, Getter, Action, Mutation, namespace } from "vuex-class";
+import { NAME_SPACE } from "@/store";
 import * as vueMapbox from "vue-mapbox";
 import randomcolor from "randomcolor";
-import { PointForUI } from "@/store/modules/map/types";
+import { PointForUI, StorePoint } from "@/store/modules/map/types";
 import MarkerUI from "@/components/mapbox/MarkerUI.vue";
+
+const mapModule = namespace(NAME_SPACE.map);
 
 @Component({
   components: {
@@ -28,7 +32,10 @@ import MarkerUI from "@/components/mapbox/MarkerUI.vue";
 })
 export default class MapboxMarker extends Vue {
   @Prop() private point!: PointForUI;
-  // マーカーの位置
+
+  @mapModule.Action("editPoint")
+  private editPoint!: (newPoint: StorePoint) => void;
+
   get coordinates() {
     const { coordinates } = this.point;
     const { lng, lat } = coordinates;
@@ -43,6 +50,19 @@ export default class MapboxMarker extends Vue {
     const markerDom = dom.marker._element;
     console.log(markerDom);
     markerDom.style.background = randomcolor();
+
+    // 地点を変更する
+    const currentPoint = this.point;
+
+    const newPoint: StorePoint = {
+      toDelete: currentPoint.toDelete,
+      newItem: currentPoint.newItem,
+      name: currentPoint.name,
+      id: currentPoint.id,
+      coordinates: { lng, lat },
+      active: currentPoint.active
+    };
+    this.editPoint(newPoint);
   }
 }
 </script>

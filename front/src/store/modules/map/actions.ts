@@ -34,7 +34,9 @@ const actions: ActionTree<MapState, {}> = {
     };
     state.tempId++;
     commit("addPointToList", point);
-    console.log(point, "in action");
+  },
+  editPoint({ commit }, newPoint: StorePoint) {
+    commit("editPoint", newPoint);
   }
 };
 
