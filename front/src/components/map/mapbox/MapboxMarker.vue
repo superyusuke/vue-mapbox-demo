@@ -5,6 +5,7 @@
     ref="marker"
     :draggable="true"
     @dragend="dragEnd"
+    @dragstart="dragStart"
   >
     <template slot="marker">
       <MarkerUI :point="point" :isActive="isActive" />
@@ -20,6 +21,7 @@ import * as vueMapbox from "vue-mapbox";
 import randomcolor from "randomcolor";
 import { PointForUI, StorePoint } from "@/store/modules/map/types";
 import MarkerUI from "@/components/map/mapbox/MarkerUI.vue";
+import createStorePointFromPointForUI from "@/store/modules/map/util/createStorePointFromPointForUI";
 
 const mapModule = namespace(NAME_SPACE.map);
 
@@ -38,6 +40,9 @@ export default class MapboxMarker extends Vue {
   @mapModule.Action("editPoint")
   private editPoint!: (newPoint: StorePoint) => void;
 
+  @mapModule.Action("setActivePoint")
+  private setActivePoint!: (newPoint: StorePoint) => void;
+
   private get isActive(): boolean {
     const thisPoint = this.point;
     const activePoint = this.activePoint;
@@ -55,6 +60,10 @@ export default class MapboxMarker extends Vue {
     const { coordinates } = this.point;
     const { lng, lat } = coordinates;
     return [lng, lat];
+  }
+  private dragStart() {
+    const activePoint = createStorePointFromPointForUI(this.point);
+    this.setActivePoint(activePoint);
   }
   dragEnd(e: any) {
     const { lng, lat } = e.marker.getLngLat();
@@ -78,6 +87,7 @@ export default class MapboxMarker extends Vue {
       active: currentPoint.active
     };
     this.editPoint(newPoint);
+    this.setActivePoint(newPoint);
   }
 }
 </script>
