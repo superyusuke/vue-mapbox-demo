@@ -11,7 +11,7 @@
       :zoom.sync="zoom"
       :center="center"
     >
-      <MglNavigationControl />
+      <MglNavigationControl class="MglNavigationControl" />
       <MarkerWrapper :points="pointListForUI" />
     </MglMap>
   </div>
@@ -78,7 +78,7 @@ export default class MainMap extends Vue {
 <style>
 .mainMapLink {
   position: absolute;
-  z-index: 100;
+  z-index: 1000;
   left: 0;
   padding: 5px;
   margin: 10px;
@@ -121,9 +121,12 @@ export default class MainMap extends Vue {
   display: none;
 }
 
-.button {
-  position: absolute;
-  z-index: 100;
-  background: rebeccapurple;
+.mapboxgl-canvas-container {
+  z-index: 1;
+  position: relative;
+}
+
+.mapboxgl-control-container {
+  z-index: 1000;
 }
 </style>

@@ -38,7 +38,7 @@ export default class PointList extends Vue {
   position: absolute;
   top: 100px;
   left: 10px;
-  z-index: 100;
+  z-index: 1000;
   background: white;
   padding: 10px;
   max-height: 60vh;

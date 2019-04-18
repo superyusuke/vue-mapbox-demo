@@ -54,7 +54,7 @@ export default class MapboxMarker extends Vue {
     const dom = this.$refs.marker as any;
     const markerDom = dom.marker._element;
     if (this.isActive) {
-      markerDom.style.zIndex = 1000;
+      markerDom.style.zIndex = 100;
     } else {
       markerDom.style.zIndex = 1;
     }
