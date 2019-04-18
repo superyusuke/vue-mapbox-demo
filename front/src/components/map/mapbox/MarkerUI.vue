@@ -8,8 +8,8 @@
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 import { PointForUI } from "@/store/modules/map/types";
-import markerUIStyle from "@/components/mapbox/markerUIStyle";
-import PopUp from "@/components/mapbox/PopUp.vue";
+import markerUIStyle from "@/components/map/mapbox/markerUIStyle";
+import PopUp from "@/components/map/mapbox/PopUp.vue";
 
 @Component({
   components: { PopUp }

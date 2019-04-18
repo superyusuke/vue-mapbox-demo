@@ -11,7 +11,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-import MapboxMarker from "@/components/mapbox/MapboxMarker.vue";
+import MapboxMarker from "@/components/map/mapbox/MapboxMarker.vue";
 import { PointForUI } from "@/store/modules/map/types";
 
 @Component({

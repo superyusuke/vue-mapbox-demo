@@ -19,7 +19,7 @@
 <script lang="ts">
 import "mapbox-gl/dist/mapbox-gl.css"; // mapbox 用の CSS
 import * as vueMapbox from "vue-mapbox"; // typeScript 的な記述。内容については後述
-import MarkerWrapper from "@/components/mapbox/MarkerWrapper.vue";
+import MarkerWrapper from "@/components/map/mapbox/MarkerWrapper.vue";
 import { Component, Vue } from "vue-property-decorator";
 import { State, Getter, Action, Mutation, namespace } from "vuex-class";
 import axios from "axios";

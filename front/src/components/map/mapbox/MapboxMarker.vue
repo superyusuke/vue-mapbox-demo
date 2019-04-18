@@ -20,7 +20,7 @@ import { NAME_SPACE } from "@/store";
 import * as vueMapbox from "vue-mapbox";
 import randomcolor from "randomcolor";
 import { PointForUI, StorePoint } from "@/store/modules/map/types";
-import MarkerUI from "@/components/mapbox/MarkerUI.vue";
+import MarkerUI from "@/components/map/mapbox/MarkerUI.vue";
 
 const mapModule = namespace(NAME_SPACE.map);
 
