@@ -17,6 +17,15 @@
       "name": "name2",
       "id": 2,
       "active": false
+    },
+    {
+      "coordinates": {
+        "lng": 135.5402707510857,
+        "lat": 34.71017549642701
+      },
+      "name": "大阪",
+      "id": 3,
+      "active": true
     }
   ]
 }

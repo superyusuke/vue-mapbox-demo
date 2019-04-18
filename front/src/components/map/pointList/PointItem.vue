@@ -1,6 +1,8 @@
 <template>
   <div class="pointItem" :id="idForScroll">
-    <div @click="clickHandler" :class="compStyle">{{ point.name }}</div>
+    <div @click="clickHandler" :class="compStyle">
+      {{ point.name }} {{ coordinates }}
+    </div>
   </div>
 </template>
 
@@ -35,6 +37,10 @@ export default class PointItem extends Vue {
   @Prop() private point!: PointForUI;
 
   @Prop() private activePoint!: StorePoint;
+
+  private get coordinates() {
+    return this.point.coordinates;
+  }
 
   @mapModule.Action("setActivePoint")
   private setActivePoint!: (activePoint: StorePoint) => void;
