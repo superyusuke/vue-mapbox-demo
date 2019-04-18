@@ -8,6 +8,21 @@ import {
 import axios from "axios";
 import storePointCreator from "@/store/modules/map/util/storePointCreator";
 import { Coordinates } from "@/store/modules/map/types";
+import createIdForScroll from "@/components/map/pointList/createIdForScroll";
+
+const getScroll = (point: StorePoint | PointForUI) => {
+  const element: any = document.getElementById("point-list");
+  const scrollPosition = element.scrollTop;
+  console.log(scrollPosition);
+
+  const targetIdString = createIdForScroll(point);
+
+  const targetGroup: any = document.getElementById(targetIdString);
+  const topPos = targetGroup.offsetTop - 20;
+  console.log(topPos);
+
+  element.scrollTop = topPos;
+};
 
 const actions: ActionTree<MapState, {}> = {
   setMapboxActions({ state }, instance) {
@@ -39,7 +54,7 @@ const actions: ActionTree<MapState, {}> = {
   setInitialPointList({ commit }, pointList: StorePoint[]) {
     commit("setInitialPointList", pointList);
   },
-  addPointToList({ commit, dispatch, state }, coordinates: Coordinates) {
+  async addPointToList({ commit, dispatch, state }, coordinates: Coordinates) {
     const point: StorePoint = {
       active: true,
       coordinates,
@@ -52,8 +67,9 @@ const actions: ActionTree<MapState, {}> = {
       toDelete: false
     };
     state.tempId++;
-    commit("addPointToList", point);
+    await commit("addPointToList", point);
     dispatch("setActivePoint", point);
+    getScroll(point);
   },
   editPoint({ commit }, newPoint: StorePoint) {
     commit("editPoint", newPoint);

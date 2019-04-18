@@ -1,6 +1,6 @@
-import { PointForUI } from "@/store/modules/map/types";
+import { PointForUI, StorePoint } from "@/store/modules/map/types";
 
-const createIdForScroll = (point: PointForUI): string => {
+const createIdForScroll = (point: PointForUI | StorePoint): string => {
   if (point.newItem.isNew) {
     return point.newItem.tempId + "new";
   }

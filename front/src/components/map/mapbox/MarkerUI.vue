@@ -39,11 +39,6 @@ export default class MarkerWrapper extends Vue {
     this.getScroll();
   }
 
-  private get idForScroll() {
-    const point = this.point;
-    return createIdForScroll(point);
-  }
-
   private getScroll() {
     const element: any = document.getElementById("point-list");
     const scrollPosition = element.scrollTop;
