@@ -43,6 +43,25 @@ export default class MapboxMarker extends Vue {
   @mapModule.Action("setActivePoint")
   private setActivePoint!: (newPoint: StorePoint) => void;
 
+  mounted() {
+    this.setZIndex();
+  }
+
+  updated() {
+    this.setZIndex();
+  }
+
+  setZIndex() {
+    const dom = this.$refs.marker as any;
+    const markerDom = dom.marker._element;
+    if (this.isActive) {
+      console.log(markerDom);
+      markerDom.style.zIndex = 1000;
+    } else {
+      markerDom.style.zIndex = 1;
+    }
+  }
+
   private get isActive(): boolean {
     const thisPoint = this.point;
     const activePoint = this.activePoint;
@@ -68,12 +87,6 @@ export default class MapboxMarker extends Vue {
   dragEnd(e: any) {
     const { lng, lat } = e.marker.getLngLat();
     console.log({ lng, lat });
-
-    // DOM を強引に取得し、操作する場合
-    const dom = this.$refs.marker as any;
-    const markerDom = dom.marker._element;
-    console.log(markerDom);
-    markerDom.style.background = randomcolor();
 
     // 地点を変更する
     const currentPoint = this.point;

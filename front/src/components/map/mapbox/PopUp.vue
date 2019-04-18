@@ -32,7 +32,7 @@ $paddingHorizontal: 10px;
   position: absolute;
   top: -125px;
   left: -$popupWidth / 2 + 2px;
-  z-index: 100;
+  z-index: 1;
 }
 .switchWrapper {
   display: flex;
