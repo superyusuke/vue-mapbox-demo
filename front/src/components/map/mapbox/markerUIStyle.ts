@@ -30,8 +30,11 @@ const colorAndOpacity = (point: PointForUI, isSelected: boolean) => {
     border: 8px solid ${color};
     width: 8px;
     height: 8px;
-    transition: border ${transitionTime};
+    transition: border ${transitionTime}, opacity ${transitionTime};
     box-shadow: 6px 10px 5px -1px rgba(0, 0, 0, 0.32);
+    &:hover {
+      opacity: 0.8;
+    }
 
     &::after {
       position: absolute;

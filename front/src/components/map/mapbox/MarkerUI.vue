@@ -1,5 +1,5 @@
 <template>
-  <div @click="markerClickHandler">
+  <div @click="markerClickHandler" class="markerUi">
     <div :class="markerUIStyle(point, isActive)"></div>
     <PopUp :isSelected="isActive" :point="point" />
   </div>
@@ -39,4 +39,7 @@ export default class MarkerWrapper extends Vue {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.markerUi {
+}
+</style>
