@@ -3,21 +3,21 @@
     <div @click="clickHandler" :class="compStyle">
       <UpdateIndicator :point="point" :isActive="isActive" />
       {{ point.name }}
-      {{ coordinates.lng }}
-      {{ coordinates.lat }}
+      <CoordinatesDebugger :point="point" />
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue, Prop } from "vue-property-decorator";
-import { Getter, Action, namespace } from "vuex-class";
+import { namespace } from "vuex-class";
 import { PointForUI, StorePoint } from "@/store/modules/map/types";
 import { NAME_SPACE } from "@/store";
 import createStorePointFromPointForUI from "@/store/modules/map/util/createStorePointFromPointForUI";
 import { css } from "emotion";
 import createIdForScroll from "@/components/map/pointList/createIdForScroll";
 import UpdateIndicator from "@/components/map/pointList/UpdateIndicator.vue";
+import CoordinatesDebugger from "@/components/map/forDev/CoordinatesDebugger.vue";
 
 const mapModule = namespace(NAME_SPACE.map);
 
@@ -40,7 +40,8 @@ const compStyle = (isActive: boolean) => {
 
 @Component({
   components: {
-    UpdateIndicator
+    UpdateIndicator,
+    CoordinatesDebugger
   }
 })
 export default class PointItem extends Vue {

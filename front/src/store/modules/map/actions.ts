@@ -76,6 +76,9 @@ const actions: ActionTree<MapState, {}> = {
   },
   setActivePoint({ commit }, activePoint: StorePoint) {
     commit("setActivePoint", activePoint);
+  },
+  setDebugMode({ state }, bool: boolean) {
+    state.isDebugMode = bool;
   }
 };
 

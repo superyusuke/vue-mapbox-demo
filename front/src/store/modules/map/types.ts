@@ -9,6 +9,7 @@ export type MapState = {
   tempId: number;
   activePoint: StorePoint | null;
   mapboxActions: any;
+  isDebugMode: boolean;
 };
 
 export type FetchedPoint = {
