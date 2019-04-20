@@ -1,24 +1,24 @@
 import { css } from "emotion";
 import { PointForUI } from "@/store/modules/map/types";
 
-const colorChanger = (point: PointForUI, isSelected: boolean) => {
+const colorChanger = (point: PointForUI, isActive: boolean) => {
   if (point.newItem.isNew) {
-    return isSelected ? "#FF0F0F" : "#f8999a";
+    return isActive ? "#FF0F0F" : "#f8999a";
   }
 
   if (point.updated) {
-    return isSelected ? "#FF8000" : "#facc99";
+    return isActive ? "#FF8000" : "#facc99";
   }
 
   if (point.active) {
-    return isSelected ? "#448aff" : "#cde6ff";
+    return isActive ? "#448aff" : "#cde6ff";
   } else {
-    return isSelected ? "#999999" : "#cccccc";
+    return isActive ? "#999999" : "#cccccc";
   }
 };
 
-const colorAndOpacity = (point: PointForUI, isSelected: boolean) => {
-  const color = colorChanger(point, isSelected);
+const colorAndOpacity = (point: PointForUI, isActive: boolean) => {
+  const color = colorChanger(point, isActive);
   const transitionTime = "0.2s";
 
   return css`
