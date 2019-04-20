@@ -1,7 +1,10 @@
 <template>
   <div class="pointItem" :id="idForScroll">
     <div @click="clickHandler" :class="compStyle">
-      {{ point.name }} {{ coordinates }}
+      <UpdateIndicator :point="point" :isActive="isActive" />
+      {{ point.name }}
+      {{ coordinates.lng }}
+      {{ coordinates.lat }}
     </div>
   </div>
 </template>
@@ -14,16 +17,21 @@ import { NAME_SPACE } from "@/store";
 import createStorePointFromPointForUI from "@/store/modules/map/util/createStorePointFromPointForUI";
 import { css } from "emotion";
 import createIdForScroll from "@/components/map/pointList/createIdForScroll";
+import UpdateIndicator from "@/components/map/pointList/UpdateIndicator.vue";
 
 const mapModule = namespace(NAME_SPACE.map);
 
 const compStyle = (isActive: boolean) => {
-  const backgroundColor = isActive ? "#ff9b9b" : "transparent";
-  const hoverColor = isActive ? "#ff9b9b" : "#d7eeff";
+  const backgroundColor = isActive ? "#e6e6e6" : "transparent";
+  const hoverColor = isActive ? "#e6e6e6" : "#d7eeff";
   return css`
     background: ${backgroundColor};
     padding: 5px 10px;
     cursor: pointer;
+    text-align: left;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     &:hover {
       background: ${hoverColor};
     }
@@ -31,7 +39,9 @@ const compStyle = (isActive: boolean) => {
 };
 
 @Component({
-  components: {}
+  components: {
+    UpdateIndicator
+  }
 })
 export default class PointItem extends Vue {
   @Prop() private point!: PointForUI;
