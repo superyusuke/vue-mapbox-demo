@@ -6,12 +6,19 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
+import GoogleMapsAPI from "./map/search/GoogleMapsAPI";
 
 @Component
 export default class HelloWorld extends Vue {
   @Prop() private msg!: number;
   get click(): number {
     return this.msg;
+  }
+
+  // fixme ダミーの実装
+  private async play() {
+    const res1 = await GoogleMapsAPI.geoCoding("渋谷区");
+    const res2 = await GoogleMapsAPI.reverseGeoCoding({ lat: 123, lng: 12 });
   }
 }
 </script>
