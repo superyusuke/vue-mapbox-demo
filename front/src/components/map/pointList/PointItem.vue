@@ -3,6 +3,7 @@
     <div @click="clickHandler" :class="compStyle">
       <UpdateIndicator :point="point" :isActive="isActive" />
       {{ point.name }}
+      <Undo :point="point" />
       <CoordinatesDebugger :point="point" />
     </div>
   </div>
@@ -18,6 +19,7 @@ import { css } from "emotion";
 import createIdForScroll from "@/components/map/pointList/createIdForScroll";
 import UpdateIndicator from "@/components/map/pointList/UpdateIndicator.vue";
 import CoordinatesDebugger from "@/components/map/forDev/CoordinatesDebugger.vue";
+import Undo from "@/components/map/functions/undo/Undo.vue";
 
 const mapModule = namespace(NAME_SPACE.map);
 
@@ -41,7 +43,8 @@ const compStyle = (isActive: boolean) => {
 @Component({
   components: {
     UpdateIndicator,
-    CoordinatesDebugger
+    CoordinatesDebugger,
+    Undo
   }
 })
 export default class PointItem extends Vue {

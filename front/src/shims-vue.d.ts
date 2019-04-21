@@ -4,3 +4,4 @@ declare module "*.vue" {
 }
 
 declare module "vue-mapbox";
+declare module "vue-material/dist/components";

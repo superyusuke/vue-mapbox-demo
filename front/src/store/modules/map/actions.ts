@@ -13,13 +13,11 @@ import createIdForScroll from "@/components/map/pointList/createIdForScroll";
 const getScroll = (point: StorePoint | PointForUI) => {
   const element: any = document.getElementById("point-list");
   const scrollPosition = element.scrollTop;
-  console.log(scrollPosition);
 
   const targetIdString = createIdForScroll(point);
 
   const targetGroup: any = document.getElementById(targetIdString);
   const topPos = targetGroup.offsetTop - 20;
-  console.log(topPos);
 
   element.scrollTop = topPos;
 };
@@ -37,7 +35,6 @@ const actions: ActionTree<MapState, {}> = {
       zoom: 17,
       speed: 5
     });
-    console.log({ newParams });
   },
   async fetchInitialPointList({ dispatch }) {
     try {
@@ -79,6 +76,9 @@ const actions: ActionTree<MapState, {}> = {
   },
   setDebugMode({ state }, bool: boolean) {
     state.isDebugMode = bool;
+  },
+  revertPoint({ commit }, targetPoint: PointForUI) {
+    commit("revertPoint", targetPoint);
   }
 };
 
