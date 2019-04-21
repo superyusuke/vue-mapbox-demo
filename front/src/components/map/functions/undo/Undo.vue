@@ -3,6 +3,9 @@
     <template v-if="canUndo">
       <div @click="undo" class="clickableArea">
         <md-icon class="icon">undo</md-icon>
+        <MdTooltip class="tip" md-direction="right"
+          >Undo modification.</MdTooltip
+        >
       </div>
     </template>
   </div>
@@ -15,8 +18,10 @@ import { PointForUI } from "@/store/modules/map/types";
 import { NAME_SPACE } from "@/store";
 
 import { MdIcon } from "vue-material/dist/components";
+import { MdTooltip } from "vue-material/dist/components";
 
 Vue.use(MdIcon);
+Vue.use(MdTooltip);
 
 const mapModule = namespace(NAME_SPACE.map);
 
@@ -47,5 +52,9 @@ export default class UndoUi extends Vue {
 <style scoped lang="scss">
 .icon {
   font-size: 15px !important;
+}
+.tip {
+  margin-left: -15px;
+  z-index: 1000;
 }
 </style>
