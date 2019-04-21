@@ -42,7 +42,6 @@ export default class MarkerWrapper extends Vue {
   private getScroll() {
     const element: any = document.getElementById("point-list");
     const scrollPosition = element.scrollTop;
-    console.log(scrollPosition);
 
     const point = this.point;
 
@@ -50,7 +49,6 @@ export default class MarkerWrapper extends Vue {
 
     const targetGroup: any = document.getElementById(targetIdString);
     const topPos = targetGroup.offsetTop - 20;
-    console.log(topPos);
 
     element.scrollTop = topPos;
   }
