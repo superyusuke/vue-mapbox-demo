@@ -1,12 +1,40 @@
 import { StorePoint, PointForUI } from "@/store/modules/map/types";
+
+const makeNewPoint = ({
+  point,
+  newName
+}: {
+  point: StorePoint;
+  newName: string;
+}): StorePoint => {
+  return { ...point, ...{ name: newName } };
+};
+
 const editPointName = ({
   currentPointList,
-  point
+  targetPoint,
+  newName
 }: {
   currentPointList: StorePoint[];
-  point: PointForUI;
+  targetPoint: PointForUI;
+  newName: string;
 }) => {
-  return currentPointList;
+  return currentPointList.map(point => {
+    // 新規ポイントの場合
+    if (point.newItem.isNew) {
+      if (point.newItem.tempId === targetPoint.newItem.tempId) {
+        return makeNewPoint({ point, newName });
+      }
+    }
+
+    // 既存ポイントの場合
+    if (!point.newItem.isNew) {
+      if (point.id === targetPoint.id) {
+        return makeNewPoint({ point, newName });
+      }
+    }
+    return point;
+  });
 };
 
 export default editPointName;

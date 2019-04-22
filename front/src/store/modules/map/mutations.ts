@@ -33,9 +33,16 @@ const mutations: MutationTree<MapState> = {
       initialPointList
     });
   },
-  editPointName(state, point: PointForUI) {
+  editPointName(
+    state,
+    { targetPoint, newName }: { targetPoint: PointForUI; newName: string }
+  ) {
     const currentPointList = state.currentPointList;
-    state.currentPointList = editPointName({ currentPointList, point });
+    state.currentPointList = editPointName({
+      currentPointList,
+      targetPoint,
+      newName
+    });
   }
 };
 
