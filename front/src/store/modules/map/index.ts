@@ -11,7 +11,13 @@ const initialState: MapState = {
   tempId: 1,
   activePoint: null,
   mapboxActions: null,
-  isDebugMode: false
+  isDebugMode: false,
+  modal: {
+    nameEdit: {
+      isOpen: false,
+      targetPoint: null
+    }
+  }
 };
 
 const namespaced = true;

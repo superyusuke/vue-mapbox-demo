@@ -10,6 +10,7 @@
 </template>
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import "@/global.css";
 
 @Component
 export default class App extends Vue {}

@@ -7,6 +7,7 @@ import {
 } from "@/store/modules/map/types";
 import editPoint from "@/store/modules/map/util/editPoint";
 import revertPoint from "@/store/modules/map/util/revertPoint";
+import editPointName from "@/store/modules/map/util/editPointName";
 
 const mutations: MutationTree<MapState> = {
   setInitialPointList(state, pointList: StorePoint[]) {
@@ -31,6 +32,10 @@ const mutations: MutationTree<MapState> = {
       currentPointList,
       initialPointList
     });
+  },
+  editPointName(state, point: PointForUI) {
+    const currentPointList = state.currentPointList;
+    state.currentPointList = editPointName({ currentPointList, point });
   }
 };
 

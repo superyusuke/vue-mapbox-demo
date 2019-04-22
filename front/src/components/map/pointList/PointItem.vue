@@ -4,6 +4,7 @@
       <UpdateIndicator :point="point" :isActive="isActive" />
       {{ point.name }}
       <Undo :point="point" />
+      <EditName :point="point" />
       <CoordinatesDebugger :point="point" />
     </div>
   </div>
@@ -20,6 +21,7 @@ import createIdForScroll from "@/components/map/pointList/createIdForScroll";
 import UpdateIndicator from "@/components/map/pointList/UpdateIndicator.vue";
 import CoordinatesDebugger from "@/components/map/forDev/CoordinatesDebugger.vue";
 import Undo from "@/components/map/functions/undo/Undo.vue";
+import EditName from "@/components/map/functions/editName/EditName.vue";
 
 const mapModule = namespace(NAME_SPACE.map);
 
@@ -44,7 +46,8 @@ const compStyle = (isActive: boolean) => {
   components: {
     UpdateIndicator,
     CoordinatesDebugger,
-    Undo
+    Undo,
+    EditName
   }
 })
 export default class PointItem extends Vue {

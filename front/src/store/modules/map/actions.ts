@@ -79,6 +79,21 @@ const actions: ActionTree<MapState, {}> = {
   },
   revertPoint({ commit }, targetPoint: PointForUI) {
     commit("revertPoint", targetPoint);
+  },
+  setModalEditName(
+    { state },
+    { isOpen, targetPoint }: { isOpen: boolean; targetPoint: PointForUI }
+  ) {
+    state.modal.nameEdit = {
+      isOpen,
+      targetPoint
+    };
+  },
+  editPointName(
+    { commit },
+    { targetPoint, newName }: { targetPoint: PointForUI; newName: string }
+  ) {
+    commit("editPointName", { targetPoint, newName });
   }
 };
 

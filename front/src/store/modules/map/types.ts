@@ -10,6 +10,7 @@ export type MapState = {
   activePoint: StorePoint | null;
   mapboxActions: any;
   isDebugMode: boolean;
+  modal: ModalState;
 };
 
 export type FetchedPoint = {
@@ -45,4 +46,13 @@ export type PointForUI = {
   };
   // 以下 getter で演算時に付与される Property
   updated: boolean;
+};
+
+export type Modal = {
+  isOpen: boolean;
+  targetPoint: PointForUI | null;
+};
+
+type ModalState = {
+  nameEdit: Modal;
 };
