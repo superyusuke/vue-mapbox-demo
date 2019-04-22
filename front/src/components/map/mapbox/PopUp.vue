@@ -3,7 +3,10 @@
     <div class="popupWrapper">
       <div class="topFrame">
         <div class="content">
-          {{ point.name }}
+          <div class="nameWrapper">
+            <div class="name">{{ point.name }}</div>
+            <EditName :point="point" />
+          </div>
         </div>
       </div>
       <div class="bottomFrame"></div>
@@ -14,9 +17,10 @@
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 import { PointForUI } from "@/store/modules/map/types";
+import EditName from "@/components/map/functions/editName/EditName.vue";
 
 @Component({
-  components: {}
+  components: { EditName }
 })
 export default class MarkerWrapper extends Vue {
   @Prop() private point!: PointForUI;
@@ -60,8 +64,8 @@ $paddingHorizontal: 10px;
   height: 100%;
   display: flex;
   flex-flow: column;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
   padding: 10px 10px 0;
 }
 
@@ -69,5 +73,16 @@ $paddingHorizontal: 10px;
   position: absolute;
   bottom: 8px;
   left: 11px;
+}
+.name {
+  width: 200px;
+  font-size: 14px;
+}
+.nameWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 </style>

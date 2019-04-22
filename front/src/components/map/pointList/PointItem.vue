@@ -1,10 +1,14 @@
 <template>
   <div class="pointItem" :id="idForScroll">
     <div @click="clickHandler" :class="compStyle">
-      <UpdateIndicator :point="point" :isActive="isActive" />
-      {{ point.name }}
-      <Undo :point="point" />
-      <EditName :point="point" />
+      <div class="nameWrapper">
+        <UpdateIndicator :point="point" :isActive="isActive" />
+        {{ point.name }}
+      </div>
+      <div class="functionWrapper">
+        <Undo :point="point" />
+        <EditName :point="point" />
+      </div>
       <CoordinatesDebugger :point="point" />
     </div>
   </div>
@@ -29,12 +33,14 @@ const compStyle = (isActive: boolean) => {
   const backgroundColor = isActive ? "#e6e6e6" : "transparent";
   const hoverColor = isActive ? "#e6e6e6" : "#d7eeff";
   return css`
+    min-width: 200px;
     background: ${backgroundColor};
     padding: 5px 10px;
     cursor: pointer;
     text-align: left;
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     align-items: center;
     &:hover {
       background: ${hoverColor};
@@ -100,7 +106,14 @@ export default class PointItem extends Vue {
 </script>
 
 <style scoped lang="scss">
-.name {
+.nameWrapper {
   text-align: left;
+  display: flex;
+  align-items: center;
+}
+.functionWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 </style>

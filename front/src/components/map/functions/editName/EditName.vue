@@ -2,6 +2,7 @@
   <div class="editName">
     <div @click="openModal">
       <md-icon class="icon">edit</md-icon>
+      <MdTooltip class="tip" md-direction="right">Rename point.</MdTooltip>
     </div>
   </div>
 </template>
@@ -37,5 +38,9 @@ export default class EditName extends Vue {
 <style scoped lang="scss">
 .icon {
   font-size: 15px !important;
+}
+.tip {
+  margin-left: -15px;
+  z-index: 1000;
 }
 </style>
