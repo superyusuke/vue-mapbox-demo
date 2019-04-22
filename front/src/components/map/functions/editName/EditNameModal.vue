@@ -1,12 +1,12 @@
 <template>
   <div class="changeNameModal">
     <md-dialog :md-active="isModalOpen" class="modal">
-      モーダルです
-      {{ modalState }}
-      <md-field>
-        <label>Type here!</label>
-        <md-input v-model="text"></md-input>
-      </md-field>
+      <div class="contentWrapper">
+        <md-field>
+          <label>名前を変更します</label>
+          <md-input v-model="text"></md-input>
+        </md-field>
+      </div>
       <div class="buttonWrapper">
         <md-button class="md-dense md-primary" @click="closeModal">
           変更せずに閉じる
@@ -82,6 +82,9 @@ export default class EditNameModal extends Vue {
 <style lang="scss" scoped>
 .modal {
   z-index: 9001;
+}
+.contentWrapper {
+  margin: 6px 8px;
 }
 .buttonWrapper {
   display: flex;
