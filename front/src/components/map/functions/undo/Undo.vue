@@ -3,9 +3,9 @@
     <template v-if="canUndo">
       <div @click="undo" class="clickableArea">
         <md-icon class="icon">undo</md-icon>
-        <MdTooltip class="tip" md-direction="right"
-          >Undo modification.</MdTooltip
-        >
+        <MdTooltip class="tip" md-direction="right">
+          Undo modification.
+        </MdTooltip>
       </div>
     </template>
   </div>
