@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-import GoogleMapsAPI from "./map/search/GoogleMapsAPI";
+import GoogleMapsAPI from "./map/GoogleMapsAPI";
 
 @Component
 export default class HelloWorld extends Vue {

@@ -26,6 +26,7 @@ import { State, Getter, Action, Mutation, namespace } from "vuex-class";
 import axios from "axios";
 import { NAME_SPACE } from "@/store";
 import { Coordinates, PointForUI } from "@/store/modules/map/types";
+import GoogleMapsAPI from "@/components/map/GoogleMapsAPI";
 
 const mapModule = namespace(NAME_SPACE.map);
 
@@ -52,7 +53,13 @@ export default class MainMap extends Vue {
   private pointListForUI!: PointForUI[];
 
   @mapModule.Action("addPointToList")
-  private addPointToList!: (coordinates: Coordinates) => void;
+  private addPointToList!: ({
+    coordinates,
+    name
+  }: {
+    coordinates: Coordinates;
+    name: string;
+  }) => void;
 
   private onMapLoaded(event: any) {
     const asyncActions = event.component.actions;
@@ -70,7 +77,12 @@ export default class MainMap extends Vue {
       lat,
       lng
     };
-    this.addPointToList(coordinates);
+    try {
+      const res = await GoogleMapsAPI.reverseGeoCoding({ lat, lng });
+      this.addPointToList({ coordinates, name: res });
+    } catch (e) {
+      this.addPointToList({ coordinates, name: "New Item" });
+    }
   }
 }
 </script>

@@ -51,12 +51,15 @@ const actions: ActionTree<MapState, {}> = {
   setInitialPointList({ commit }, pointList: StorePoint[]) {
     commit("setInitialPointList", pointList);
   },
-  async addPointToList({ commit, dispatch, state }, coordinates: Coordinates) {
+  async addPointToList(
+    { commit, dispatch, state },
+    { coordinates, name }: { coordinates: Coordinates; name: string }
+  ) {
     const point: StorePoint = {
       active: true,
       coordinates,
       id: null,
-      name: "newItem",
+      name: name,
       newItem: {
         isNew: true,
         tempId: state.tempId

@@ -4,7 +4,7 @@
       <div class="topFrame">
         <div class="content">
           <div class="nameWrapper">
-            <div class="name">{{ point.name }}</div>
+            <div class="name">{{ nameSubStringed }}</div>
             <EditName :point="point" />
           </div>
         </div>
@@ -25,6 +25,15 @@ import EditName from "@/components/map/functions/editName/EditName.vue";
 export default class MarkerWrapper extends Vue {
   @Prop() private point!: PointForUI;
   @Prop() private isSelected!: boolean;
+
+  get nameSubStringed() {
+    const name = this.point.name;
+    const length = 40;
+    if (name.length >= length) {
+      return name.substring(0, length) + "...";
+    }
+    return name;
+  }
 }
 </script>
 
@@ -76,7 +85,9 @@ $paddingHorizontal: 10px;
 }
 .name {
   width: 200px;
-  font-size: 14px;
+  font-size: 13px;
+  line-height: 1.4;
+  text-align: left;
 }
 .nameWrapper {
   display: flex;
