@@ -23,7 +23,6 @@ import * as vueMapbox from "vue-mapbox"; // typeScript 的な記述。内容に�
 import MarkerWrapper from "@/components/map/mapbox/MarkerWrapper.vue";
 import { Component, Vue } from "vue-property-decorator";
 import { State, Getter, Action, Mutation, namespace } from "vuex-class";
-import axios from "axios";
 import { NAME_SPACE } from "@/store";
 import { Coordinates, PointForUI } from "@/store/modules/map/types";
 import GoogleMapsAPI from "@/components/map/GoogleMapsAPI";
