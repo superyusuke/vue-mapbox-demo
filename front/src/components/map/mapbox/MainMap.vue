@@ -22,7 +22,7 @@ import "mapbox-gl/dist/mapbox-gl.css"; // mapbox 用の CSS
 import * as vueMapbox from "vue-mapbox"; // typeScript 的な記述。内容については後述
 import MarkerWrapper from "@/components/map/mapbox/MarkerWrapper.vue";
 import { Component, Vue } from "vue-property-decorator";
-import { State, Getter, Action, Mutation, namespace } from "vuex-class";
+import { namespace } from "vuex-class";
 import { NAME_SPACE } from "@/store";
 import { Coordinates, PointForUI } from "@/store/modules/map/types";
 import GoogleMapsAPI from "@/components/map/GoogleMapsAPI";
@@ -38,9 +38,9 @@ const mapModule = namespace(NAME_SPACE.map);
 })
 export default class MainMap extends Vue {
   accessToken = process.env.VUE_APP_MAPBOX_KEY; // 環境変数として持つ。オープンな git リポジトリにキーを公開しないため。
-  zoom = 17;
-  mapStyle = "mapbox://styles/mapbox/streets-v10"; // 見た目。色々あるが標準のものを採用
-  center = { lon: 139.7009177, lat: 35.6580971 }; // 地図の中心地
+  private zoom = 17;
+  private readonly mapStyle = "mapbox://styles/mapbox/streets-v10"; // 見た目。色々あるが標準のものを採用
+  private center = { lon: 139.7009177, lat: 35.6580971 }; // 地図の中心地
 
   @mapModule.Action("setMapboxActions")
   private setMapboxActions!: (mapboxActions: any) => void;
