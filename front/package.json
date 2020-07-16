@@ -15,7 +15,7 @@
     "axios": "^0.18.0",
     "core-js": "^2.6.5",
     "emotion": "^10.0.9",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.19",
     "mapbox-gl": "^0.53.1",
     "material-design-icons-iconfont": "^4.0.5",
     "randomcolor": "^0.5.4",
